@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const pool = require('../db/db');
+
 const {
 	getAllTasks,
 	getTaskById,
@@ -9,9 +9,9 @@ const {
 } = require('../controllers/task.controllers');
 
 router.get('/tasks', getAllTasks);
-router.get('/tasks/:id', getTaskById);
+router.get('/task/:id', getTaskById);
 router.post('/newTask', createTask);
-router.put('/updateTask', updateTask);
-router.delete('/deleteTask', deleteTask);
+router.put('/updateTask/:id', updateTask);
+router.delete('/deleteTask/:id', deleteTask);
 
 module.exports = router;

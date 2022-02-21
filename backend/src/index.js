@@ -6,6 +6,7 @@ const app = express();
 const taskRoutes = require('./routes/tasks.routes');
 
 app.use(morgan('dev'));
+app.use(express.json());
 
 app.use(taskRoutes);
 
