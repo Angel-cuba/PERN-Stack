@@ -1,14 +1,25 @@
 import { Button, Card, CardContent, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { readAllTasks } from '../api/request';
+import { readAllTasks, deleteTask } from '../api/request';
 
 export const TaskList = () => {
 	const [tasks, setTasks] = useState();
+	console.log(tasks);
 	useEffect(() => {
 		readAllTasks()
 			.then((response) => response.json())
 			.then((responseData) => setTasks(responseData));
 	}, []);
+	const hadleDeleteTask = async (id) => {
+		try {
+			await deleteTask(id).then((response) => console.log(response));
+			//delete a single element with a unique id
+			setTasks(tasks.filter((task) => task.id !== id));
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<>
 			<h1>Task list</h1>
@@ -30,11 +41,11 @@ export const TaskList = () => {
 									style={{ marginRight: '1.5rem' }}
 									variant="contained"
 									color="primary"
-									onClick={() => console.log('Edit')}
+									onClick={() => console.log('editTask')}
 								>
 									Edit
 								</Button>
-								<Button variant="contained" color="error" onClick={() => console.log('Delete')}>
+								<Button variant="contained" color="error" onClick={() => hadleDeleteTask(task.id)}>
 									Delete
 								</Button>
 							</div>

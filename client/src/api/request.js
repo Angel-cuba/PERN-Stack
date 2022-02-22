@@ -7,3 +7,8 @@ export const postTask = async (task) =>
 	})
 		.then((response) => response.json())
 		.then((data) => console.log('data', data));
+
+export const deleteTask = async (id) =>
+	fetch(`http://localhost:4000/deleteTask/${id}`, {
+		method: 'DELETE',
+	});
