@@ -7,8 +7,8 @@ import {
 	TextField,
 	Typography,
 } from '@mui/material';
-import { useState, useEffect } from 'react';
-import { postTask, readAllTasks } from '../api/request';
+import { useState } from 'react';
+import { postTask } from '../api/request';
 import { useNavigate } from 'react-router-dom';
 
 export const TaskForm = () => {
@@ -18,12 +18,6 @@ export const TaskForm = () => {
 		description: '',
 	});
 	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		readAllTasks()
-			.then((response) => response.json())
-			.then((responseData) => console.log(responseData));
-	}, []);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
