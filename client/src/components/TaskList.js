@@ -1,15 +1,18 @@
 import { Button, Card, CardContent, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { readAllTasks, deleteTask } from '../api/request';
+import { useNavigate } from 'react-router-dom';
 
 export const TaskList = () => {
+	const navigate = useNavigate();
 	const [tasks, setTasks] = useState();
-	console.log(tasks);
+
 	useEffect(() => {
 		readAllTasks()
 			.then((response) => response.json())
 			.then((responseData) => setTasks(responseData));
 	}, []);
+
 	const hadleDeleteTask = async (id) => {
 		try {
 			await deleteTask(id).then((response) => console.log(response));
@@ -41,7 +44,7 @@ export const TaskList = () => {
 									style={{ marginRight: '1.5rem' }}
 									variant="contained"
 									color="primary"
-									onClick={() => console.log('editTask')}
+									onClick={() => navigate(`/task/${task.id}/edit`)}
 								>
 									Edit
 								</Button>
